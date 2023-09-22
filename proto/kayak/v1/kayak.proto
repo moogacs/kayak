@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+package kayak.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/binarymatt/kayak/gen/kayak/v1;kayakv1";
+
+service KayakService {
+  rpc PutRecords(PutRecordsRequest) returns (google.protobuf.Empty) {}
+  rpc CommitRecord(CommitRecordRequest) returns (google.protobuf.Empty) {}
+  rpc Apply(Command) returns (google.protobuf.Empty) {}
+
+  rpc GetRecords(GetRecordsRequest) returns (GetRecordsResponse) {}
+  rpc FetchRecord(FetchRecordRequest) returns (FetchRecordsResponse) {}
+  rpc StreamRecords(StreamRecordsRequest) returns (stream Record) {}
+  rpc CreateTopic(CreateTopicRequest) returns (google.protobuf.Empty) {}
+  rpc DeleteTopic(DeleteTopicRequest) returns (google.protobuf.Empty) {}
+  rpc ListTopics(ListTopicsRequest) returns (ListTopicsResponse) {}
+
+  rpc Stats(google.protobuf.Empty) returns (StatsResponse) {}
+  rpc GetNodeDetails(google.protobuf.Empty) returns (GetNodeDetailsResponse) {}
+}
+message CommitRecordRequest {
+  string topic = 1;
+  string consumer_id = 2;
+  string position = 3;
+}
+
+message PutRecordsRequest {
+  string topic = 1 [(buf.validate.field).string.min_len = 1];
+  repeated Record records = 2 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100
+  ];
+  string idempotency_key = 3;
+}
+message Record {
+  string topic = 1;
+  string partition = 2;
+  string id = 3;
+  map<string, string> headers = 4;
+  bytes payload = 5 [(buf.validate.field).bytes.min_len = 1];
+}
+
+message FetchRecordRequest {
+  // topic is the topic to get records from
+  string topic = 1 [(buf.validate.field).string.min_len = 1];
+  // consumer_group, if passed, will tell kayak what position to start from
+  string consumer_id = 2;
+  // position is where in the stream to start consuming.
+  string position = 3;
+}
+
+message FetchRecordsResponse {
+  Record record = 1;
+}
+
+message GetRecordsRequest {
+  string topic = 1 [(buf.validate.field).string.min_len = 1];
+  string start = 2;
+  int32 limit = 3;
+}
+
+message GetRecordsResponse {
+  repeated Record records = 1;
+}
+
+message CreateTopicRequest {
+  string name = 1;
+}
+message DeleteTopicRequest {
+  string topic = 1 [(buf.validate.field).required = true];
+}
+message Topic {
+  string name = 1;
+  int64 partitions = 2;
+}
+message ListTopicsRequest {}
+message ListTopicsResponse {
+  repeated Topic topics = 1;
+}
+message StatsResponse {
+  map<string, string> raft = 1;
+  map<string, TopicMetadata> store = 2;
+}
+
+message Command {
+  oneof payload {
+    PutRecordsRequest put_records_request = 1;
+    CreateTopicRequest create_topic_request = 2;
+    CommitRecordRequest commit_record_request = 3;
+    DeleteTopicRequest delete_topic_request = 4;
+  }
+}
+
+message GetNodeDetailsResponse {
+  string id = 1;
+  int32 port = 2;
+}
+
+message KVItem {
+  bytes key = 1;
+  bytes value = 2;
+  bytes bucket = 3;
+}
+
+message StreamRecordsRequest {
+  // topic is the topic to get records from
+  string topic = 1 [(buf.validate.field).string.min_len = 1];
+  // position is where in the stream to start consuming.
+  string position = 2;
+  // batch_size indicates how many records to pull at once. If a value of 0 is given, service defaults to 1.
+  int32 batch_size = 3;
+  // timeout is when the server should return if no new records are found.
+  google.protobuf.Duration timeout = 4;
+}
+
+message TopicMetadata {
+  string name = 1;
+  int64 record_count = 2;
+  google.protobuf.Timestamp created_at = 3;
+  bool archived = 4;
+  map<string, string> consumers = 5;
+}

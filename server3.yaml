@@ -1,0 +1,8 @@
+---
+id: 3
+dir: data/
+port: 8083
+serf_port: 9003
+host: node3
+peers:
+  - node1:9001

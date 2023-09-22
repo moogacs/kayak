@@ -1,0 +1,46 @@
+---
+configs:
+  node1_config:
+    file: ./server1.yaml
+  node2_config:
+    file: ./server2.yaml
+  node3_config:
+    file: ./server3.yaml
+services:
+  node1:
+    image: kayak:latest
+    healthcheck:
+      test: wget -q http://0.0.0.0:8081/ready || exit 1
+      interval: 2s
+      timeout: 2s
+      retries: 4
+      start_period: 2s
+      start_interval: 10s
+    configs:
+      - node1_config
+    command: ["--id", "1", "--dir", "/data/", "--config", "/node1_config", "--host", "node1", "--console"]  # yamllint disable-line rule:line-length
+    ports:
+      - "8081:8081"
+      - "9001:9001"
+  node2:
+    image: kayak:latest
+    command: ["--id", "2", "--dir", "/data/", "--config", "/node2_config", "--console"]  # yamllint disable-line rule:line-length
+    configs:
+      - node2_config
+    depends_on:
+      node1:
+        condition: service_healthy
+    ports:
+      - "8082:8082"
+      - "9002:9002"
+  node3:
+    image: kayak:latest
+    command: ["--id", "3", "--dir", "/data/", "--config", "/node3_config", "--console"]  # yamllint disable-line rule:line-length
+    configs:
+      - node3_config
+    depends_on:
+      node1:
+        condition: service_healthy
+    ports:
+      - "8083:8083"
+      - "9003:9003"

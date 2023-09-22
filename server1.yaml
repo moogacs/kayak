@@ -1,0 +1,6 @@
+---
+id: 1
+dir: data/
+port: 8081
+serf_port: 9001
+bootstrap: true

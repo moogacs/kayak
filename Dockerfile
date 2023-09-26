@@ -1,5 +1,5 @@
 # Use the Go image to build our application.
-FROM golang:1.21 as builder
+FROM golang:1.21-alpine3.18 as builder
 
 # Copy the present working directory to our source directory in Docker.
 # Change the current directory in Docker to our source directory.

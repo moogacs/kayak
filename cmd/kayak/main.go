@@ -3,13 +3,13 @@ package main
 import (
 	"context"
 	"errors"
-	"log/slog"
 	"os"
 	"os/signal"
 	"path/filepath"
 	"syscall"
 
 	"github.com/dgraph-io/badger/v4"
+	"github.com/lmittmann/tint"
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
 	"go.opentelemetry.io/otel"
@@ -21,8 +21,10 @@ import (
 	"go.opentelemetry.io/otel/sdk/resource"
 	"go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.21.0"
+	"log/slog"
 
 	"github.com/binarymatt/kayak/internal/config"
+	"github.com/binarymatt/kayak/internal/log"
 	"github.com/binarymatt/kayak/internal/service"
 	"github.com/binarymatt/kayak/internal/store"
 )
@@ -82,7 +84,9 @@ func setupLogging(console bool) {
 	var logger *slog.Logger
 	opts := &slog.HandlerOptions{Level: slog.LevelInfo, AddSource: true}
 	if console {
-		logger = slog.New(slog.NewTextHandler(os.Stderr, opts))
+		logger = slog.New(tint.NewHandler(os.Stderr, &tint.Options{
+			Level: slog.LevelInfo,
+		}))
 	} else {
 		logger = slog.New(slog.NewJSONHandler(os.Stderr, opts))
 	}
@@ -176,7 +180,9 @@ func kayakRun(cctx *cli.Context) error {
 	)
 	defer cancel()
 	slog.Warn("opening badger db")
-	db, err := badger.Open(badger.DefaultOptions(filepath.Join(path, "badger.db")))
+	options := badger.DefaultOptions(filepath.Join(path, "badger.db")).
+		WithLogger(&log.BadgerLogger{})
+	db, err := badger.Open(options)
 	if err != nil {
 		slog.Error("could not open boltdb file", "error", err)
 		return err

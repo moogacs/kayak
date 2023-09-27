@@ -1,6 +1,6 @@
 module github.com/binarymatt/kayak
 
-go 1.20
+go 1.21
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.30.0-20230530223247-ca37dc8895db.1
@@ -20,6 +20,7 @@ require (
 	github.com/hashicorp/raft-autopilot v0.2.0
 	github.com/hashicorp/raft-boltdb v0.0.0-20230125174641-2a8082862702
 	github.com/hashicorp/serf v0.10.1
+	github.com/lmittmann/tint v1.0.2
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/prometheus/client_golang v1.15.1
 	github.com/stretchr/testify v1.8.4

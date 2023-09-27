@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -18,6 +17,7 @@ import (
 
 	"connectrpc.com/connect"
 	"connectrpc.com/otelconnect"
+	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/memberlist"
 	"github.com/hashicorp/raft"
 	autopilot "github.com/hashicorp/raft-autopilot"
@@ -27,6 +27,7 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"golang.org/x/sync/errgroup"
+	"log/slog"
 
 	"github.com/binarymatt/kayak/gen/admin/v1/adminv1connect"
 	"github.com/binarymatt/kayak/gen/kayak/v1/kayakv1connect"
@@ -191,7 +192,7 @@ func (s *service) Init() error {
 	manager := transport.New(raft.ServerAddress(s.cfg.RaftAddress()), nil, transport.WithHeartbeatTimeout(30*time.Second))
 	tp := manager.Transport()
 	s.manager = manager
-	c.LogLevel = "warn"
+	c.Logger = hclog.NewNullLogger()
 	r, err := raft.NewRaft(c, fsm, ldb, sdb, fss, tp)
 	if err != nil {
 		slog.Error("error setting up raft", "error", err)

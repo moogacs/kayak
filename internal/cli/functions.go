@@ -10,7 +10,7 @@ import (
 	"github.com/urfave/cli/v2"
 	"google.golang.org/protobuf/types/known/emptypb"
 
-	adminv1 "github.com/binarymatt/kayak/gen/admin/v1"
+	adminv1 "github.com/kayak/gen/proto/admin/v1"
 )
 
 func AdminLeader(cctx *cli.Context) error {

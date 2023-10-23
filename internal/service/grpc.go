@@ -16,8 +16,8 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/types/known/emptypb"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
-	"github.com/binarymatt/kayak/gen/kayak/v1/kayakv1connect"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
+	"github.com/kayak/gen/proto/kayak/v1/kayakv1connect"
 )
 
 func (s *service) PutRecords(ctx context.Context, req *connect.Request[kayakv1.PutRecordsRequest]) (*connect.Response[emptypb.Empty], error) {

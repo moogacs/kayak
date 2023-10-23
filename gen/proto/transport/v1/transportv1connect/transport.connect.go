@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "github.com/binarymatt/kayak/gen/transport/v1"
+	v1 "github.com/kayak/gen/proto/transport/v1"
 	http "net/http"
 	strings "strings"
 )
@@ -22,7 +22,7 @@ const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// RaftTransportName is the fully-qualified name of the RaftTransport service.
-	RaftTransportName = "transport.v1.RaftTransport"
+	RaftTransportName = "proto.transport.v1.RaftTransport"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -35,22 +35,22 @@ const (
 const (
 	// RaftTransportAppendEntriesPipelineProcedure is the fully-qualified name of the RaftTransport's
 	// AppendEntriesPipeline RPC.
-	RaftTransportAppendEntriesPipelineProcedure = "/transport.v1.RaftTransport/AppendEntriesPipeline"
+	RaftTransportAppendEntriesPipelineProcedure = "/proto.transport.v1.RaftTransport/AppendEntriesPipeline"
 	// RaftTransportAppendEntriesProcedure is the fully-qualified name of the RaftTransport's
 	// AppendEntries RPC.
-	RaftTransportAppendEntriesProcedure = "/transport.v1.RaftTransport/AppendEntries"
+	RaftTransportAppendEntriesProcedure = "/proto.transport.v1.RaftTransport/AppendEntries"
 	// RaftTransportRequestVoteProcedure is the fully-qualified name of the RaftTransport's RequestVote
 	// RPC.
-	RaftTransportRequestVoteProcedure = "/transport.v1.RaftTransport/RequestVote"
+	RaftTransportRequestVoteProcedure = "/proto.transport.v1.RaftTransport/RequestVote"
 	// RaftTransportTimeoutNowProcedure is the fully-qualified name of the RaftTransport's TimeoutNow
 	// RPC.
-	RaftTransportTimeoutNowProcedure = "/transport.v1.RaftTransport/TimeoutNow"
+	RaftTransportTimeoutNowProcedure = "/proto.transport.v1.RaftTransport/TimeoutNow"
 	// RaftTransportInstallSnapshotProcedure is the fully-qualified name of the RaftTransport's
 	// InstallSnapshot RPC.
-	RaftTransportInstallSnapshotProcedure = "/transport.v1.RaftTransport/InstallSnapshot"
+	RaftTransportInstallSnapshotProcedure = "/proto.transport.v1.RaftTransport/InstallSnapshot"
 )
 
-// RaftTransportClient is a client for the transport.v1.RaftTransport service.
+// RaftTransportClient is a client for the proto.transport.v1.RaftTransport service.
 type RaftTransportClient interface {
 	// AppendEntriesPipeline opens an AppendEntries message stream.
 	AppendEntriesPipeline(context.Context) *connect.BidiStreamForClient[v1.AppendEntriesRequest, v1.AppendEntriesResponse]
@@ -64,7 +64,7 @@ type RaftTransportClient interface {
 	InstallSnapshot(context.Context) *connect.ClientStreamForClient[v1.InstallSnapshotRequest, v1.InstallSnapshotResponse]
 }
 
-// NewRaftTransportClient constructs a client for the transport.v1.RaftTransport service. By
+// NewRaftTransportClient constructs a client for the proto.transport.v1.RaftTransport service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -111,32 +111,32 @@ type raftTransportClient struct {
 	installSnapshot       *connect.Client[v1.InstallSnapshotRequest, v1.InstallSnapshotResponse]
 }
 
-// AppendEntriesPipeline calls transport.v1.RaftTransport.AppendEntriesPipeline.
+// AppendEntriesPipeline calls proto.transport.v1.RaftTransport.AppendEntriesPipeline.
 func (c *raftTransportClient) AppendEntriesPipeline(ctx context.Context) *connect.BidiStreamForClient[v1.AppendEntriesRequest, v1.AppendEntriesResponse] {
 	return c.appendEntriesPipeline.CallBidiStream(ctx)
 }
 
-// AppendEntries calls transport.v1.RaftTransport.AppendEntries.
+// AppendEntries calls proto.transport.v1.RaftTransport.AppendEntries.
 func (c *raftTransportClient) AppendEntries(ctx context.Context, req *connect.Request[v1.AppendEntriesRequest]) (*connect.Response[v1.AppendEntriesResponse], error) {
 	return c.appendEntries.CallUnary(ctx, req)
 }
 
-// RequestVote calls transport.v1.RaftTransport.RequestVote.
+// RequestVote calls proto.transport.v1.RaftTransport.RequestVote.
 func (c *raftTransportClient) RequestVote(ctx context.Context, req *connect.Request[v1.RequestVoteRequest]) (*connect.Response[v1.RequestVoteResponse], error) {
 	return c.requestVote.CallUnary(ctx, req)
 }
 
-// TimeoutNow calls transport.v1.RaftTransport.TimeoutNow.
+// TimeoutNow calls proto.transport.v1.RaftTransport.TimeoutNow.
 func (c *raftTransportClient) TimeoutNow(ctx context.Context, req *connect.Request[v1.TimeoutNowRequest]) (*connect.Response[v1.TimeoutNowResponse], error) {
 	return c.timeoutNow.CallUnary(ctx, req)
 }
 
-// InstallSnapshot calls transport.v1.RaftTransport.InstallSnapshot.
+// InstallSnapshot calls proto.transport.v1.RaftTransport.InstallSnapshot.
 func (c *raftTransportClient) InstallSnapshot(ctx context.Context) *connect.ClientStreamForClient[v1.InstallSnapshotRequest, v1.InstallSnapshotResponse] {
 	return c.installSnapshot.CallClientStream(ctx)
 }
 
-// RaftTransportHandler is an implementation of the transport.v1.RaftTransport service.
+// RaftTransportHandler is an implementation of the proto.transport.v1.RaftTransport service.
 type RaftTransportHandler interface {
 	// AppendEntriesPipeline opens an AppendEntries message stream.
 	AppendEntriesPipeline(context.Context, *connect.BidiStream[v1.AppendEntriesRequest, v1.AppendEntriesResponse]) error
@@ -181,7 +181,7 @@ func NewRaftTransportHandler(svc RaftTransportHandler, opts ...connect.HandlerOp
 		svc.InstallSnapshot,
 		opts...,
 	)
-	return "/transport.v1.RaftTransport/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/proto.transport.v1.RaftTransport/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case RaftTransportAppendEntriesPipelineProcedure:
 			raftTransportAppendEntriesPipelineHandler.ServeHTTP(w, r)
@@ -203,21 +203,21 @@ func NewRaftTransportHandler(svc RaftTransportHandler, opts ...connect.HandlerOp
 type UnimplementedRaftTransportHandler struct{}
 
 func (UnimplementedRaftTransportHandler) AppendEntriesPipeline(context.Context, *connect.BidiStream[v1.AppendEntriesRequest, v1.AppendEntriesResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("transport.v1.RaftTransport.AppendEntriesPipeline is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("proto.transport.v1.RaftTransport.AppendEntriesPipeline is not implemented"))
 }
 
 func (UnimplementedRaftTransportHandler) AppendEntries(context.Context, *connect.Request[v1.AppendEntriesRequest]) (*connect.Response[v1.AppendEntriesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("transport.v1.RaftTransport.AppendEntries is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.transport.v1.RaftTransport.AppendEntries is not implemented"))
 }
 
 func (UnimplementedRaftTransportHandler) RequestVote(context.Context, *connect.Request[v1.RequestVoteRequest]) (*connect.Response[v1.RequestVoteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("transport.v1.RaftTransport.RequestVote is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.transport.v1.RaftTransport.RequestVote is not implemented"))
 }
 
 func (UnimplementedRaftTransportHandler) TimeoutNow(context.Context, *connect.Request[v1.TimeoutNowRequest]) (*connect.Response[v1.TimeoutNowResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("transport.v1.RaftTransport.TimeoutNow is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.transport.v1.RaftTransport.TimeoutNow is not implemented"))
 }
 
 func (UnimplementedRaftTransportHandler) InstallSnapshot(context.Context, *connect.ClientStream[v1.InstallSnapshotRequest]) (*connect.Response[v1.InstallSnapshotResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("transport.v1.RaftTransport.InstallSnapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.transport.v1.RaftTransport.InstallSnapshot is not implemented"))
 }

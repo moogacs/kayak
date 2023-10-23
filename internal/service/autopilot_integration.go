@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"connectrpc.com/connect"
-	"github.com/binarymatt/kayak/gen/kayak/v1/kayakv1connect"
 	"github.com/hashicorp/raft"
 	autopilot "github.com/hashicorp/raft-autopilot"
+	"github.com/kayak/gen/proto/kayak/v1/kayakv1connect"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 

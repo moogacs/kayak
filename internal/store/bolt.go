@@ -14,8 +14,8 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
-	"github.com/binarymatt/kayak/internal"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
+	"github.com/kayak/internal"
 )
 
 var (

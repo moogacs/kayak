@@ -9,8 +9,8 @@ import (
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/oklog/ulid/v2"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
-	"github.com/binarymatt/kayak/gen/kayak/v1/kayakv1connect"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
+	"github.com/kayak/gen/proto/kayak/v1/kayakv1connect"
 )
 
 type Config struct {

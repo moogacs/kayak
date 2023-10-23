@@ -4,8 +4,8 @@ import (
 	"context"
 	"strconv"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
 	"connectrpc.com/connect"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
 )
 
 func (s *ServiceTestSuite) TestPutRecords() {

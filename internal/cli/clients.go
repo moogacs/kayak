@@ -3,8 +3,8 @@ package cli
 import (
 	"net/http"
 
-	"github.com/binarymatt/kayak/gen/admin/v1/adminv1connect"
-	"github.com/binarymatt/kayak/gen/kayak/v1/kayakv1connect"
+	"github.com/kayak/gen/proto/admin/v1/adminv1connect"
+	"github.com/kayak/gen/proto/kayak/v1/kayakv1connect"
 )
 
 func buildAdminClient(host string) adminv1connect.AdminServiceClient {

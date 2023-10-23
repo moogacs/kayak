@@ -9,9 +9,10 @@ import (
 
 	badger "github.com/dgraph-io/badger/v4"
 	"google.golang.org/protobuf/proto"
+
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
 )
 
 type badgerStore struct {

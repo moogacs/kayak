@@ -15,6 +15,8 @@ import (
 	"syscall"
 	"time"
 
+	"log/slog"
+
 	"connectrpc.com/connect"
 	"connectrpc.com/otelconnect"
 	"github.com/hashicorp/go-hclog"
@@ -27,15 +29,14 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"golang.org/x/sync/errgroup"
-	"log/slog"
 
-	"github.com/binarymatt/kayak/gen/admin/v1/adminv1connect"
-	"github.com/binarymatt/kayak/gen/kayak/v1/kayakv1connect"
-	"github.com/binarymatt/kayak/gen/transport/v1/transportv1connect"
-	"github.com/binarymatt/kayak/internal/config"
-	"github.com/binarymatt/kayak/internal/fsm"
-	"github.com/binarymatt/kayak/internal/store"
-	"github.com/binarymatt/kayak/internal/transport"
+	"github.com/kayak/gen/proto/admin/v1/adminv1connect"
+	"github.com/kayak/gen/proto/kayak/v1/kayakv1connect"
+	"github.com/kayak/gen/proto/transport/v1/transportv1connect"
+	"github.com/kayak/internal/config"
+	"github.com/kayak/internal/fsm"
+	"github.com/kayak/internal/store"
+	"github.com/kayak/internal/transport"
 )
 
 var (

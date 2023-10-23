@@ -3,7 +3,7 @@ package store
 import (
 	"context"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
 )
 
 type Store interface {

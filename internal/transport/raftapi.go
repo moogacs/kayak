@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	transportv1 "github.com/binarymatt/kayak/gen/transport/v1"
 	"github.com/hashicorp/raft"
+	transportv1 "github.com/kayak/gen/proto/transport/v1"
 	"google.golang.org/grpc"
 )
 

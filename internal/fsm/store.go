@@ -7,11 +7,11 @@ import (
 	"io"
 	"log/slog"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
-	"github.com/binarymatt/kayak/internal/store"
 	"github.com/boltdb/bolt"
 	"github.com/dgraph-io/badger/v4"
 	"github.com/hashicorp/raft"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
+	"github.com/kayak/internal/store"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )

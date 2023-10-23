@@ -5,7 +5,7 @@ import (
 	"log/slog"
 
 	"connectrpc.com/connect"
-	"github.com/binarymatt/kayak/internal/log"
+	"github.com/kayak/internal/log"
 	"go.opentelemetry.io/otel/trace"
 )
 

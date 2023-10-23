@@ -6,8 +6,8 @@ import (
 	"log/slog"
 
 	"connectrpc.com/connect"
-	adminv1 "github.com/binarymatt/kayak/gen/admin/v1"
 	nomad "github.com/hashicorp/nomad/api"
+	adminv1 "github.com/kayak/gen/proto/admin/v1"
 	"github.com/urfave/cli/v2"
 )
 

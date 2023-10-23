@@ -7,9 +7,9 @@ import (
 	"log/slog"
 	"testing"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
 	"github.com/dgraph-io/badger/v4"
 	"github.com/google/go-cmp/cmp"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/testing/protocmp"

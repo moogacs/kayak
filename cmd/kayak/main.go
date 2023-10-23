@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 	"syscall"
 
+	"log/slog"
+
 	"github.com/dgraph-io/badger/v4"
 	"github.com/lmittmann/tint"
 	"github.com/urfave/cli/v2"
@@ -21,12 +23,11 @@ import (
 	"go.opentelemetry.io/otel/sdk/resource"
 	"go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.21.0"
-	"log/slog"
 
-	"github.com/binarymatt/kayak/internal/config"
-	"github.com/binarymatt/kayak/internal/log"
-	"github.com/binarymatt/kayak/internal/service"
-	"github.com/binarymatt/kayak/internal/store"
+	"github.com/kayak/internal/config"
+	"github.com/kayak/internal/log"
+	"github.com/kayak/internal/service"
+	"github.com/kayak/internal/store"
 )
 
 func main() {

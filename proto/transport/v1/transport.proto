@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package transport.v1;
+package proto.transport.v1;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/binarymatt/kayak/gen/transport/v1;transportv1";
+option go_package = "github.com/kayak/gen/proto/transport/v1;transportv1";
 
 service RaftTransport {
   // AppendEntriesPipeline opens an AppendEntries message stream.

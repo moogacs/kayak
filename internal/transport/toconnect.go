@@ -4,8 +4,8 @@ import (
 	"github.com/hashicorp/raft"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	pb "github.com/binarymatt/kayak/gen/transport/v1"
-	transportv1 "github.com/binarymatt/kayak/gen/transport/v1"
+	pb "github.com/kayak/gen/proto/transport/v1"
+	transportv1 "github.com/kayak/gen/proto/transport/v1"
 )
 
 func encodeAppendEntriesRequest(s *raft.AppendEntriesRequest) *transportv1.AppendEntriesRequest {

@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package kayak.v1;
+package proto.kayak.v1;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/binarymatt/kayak/gen/kayak/v1;kayakv1";
+option go_package = "github.com/kayak/gen/proto/kayak/v1;kayakv1";
 
 service KayakService {
   rpc PutRecords(PutRecordsRequest) returns (google.protobuf.Empty) {}

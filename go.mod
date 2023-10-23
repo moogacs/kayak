@@ -1,12 +1,11 @@
-module github.com/binarymatt/kayak
+module github.com/kayak
 
 go 1.21
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.30.0-20230530223247-ca37dc8895db.1
-	connectrpc.com/connect v1.11.0
+	connectrpc.com/connect v1.11.1
 	connectrpc.com/otelconnect v0.5.0
-	github.com/binarymatt/kayak/client v0.0.0-20230922221046-d714cd75af64
 	github.com/boltdb/bolt v1.3.1
 	github.com/bufbuild/protovalidate-go v0.1.1
 	github.com/dgraph-io/badger/v4 v4.2.0
@@ -20,6 +19,7 @@ require (
 	github.com/hashicorp/raft-autopilot v0.2.0
 	github.com/hashicorp/raft-boltdb v0.0.0-20230125174641-2a8082862702
 	github.com/hashicorp/serf v0.10.1
+	github.com/kayak/client v0.0.0-00010101000000-000000000000
 	github.com/lmittmann/tint v1.0.2
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/prometheus/client_golang v1.15.1
@@ -38,6 +38,8 @@ require (
 	google.golang.org/protobuf v1.31.0
 	gopkg.in/yaml.v3 v3.0.1
 )
+
+replace github.com/kayak/client => ./client
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect

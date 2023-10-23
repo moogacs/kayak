@@ -4,21 +4,21 @@ plugins:
   - plugin: go
     out: gen
     opt:
-      - paths=import
-      - module=github.com/binarymatt/kayak/gen
+      - paths=source_relative
+    path: ["go", "run", "google.golang.org/protobuf/cmd/protoc-gen-go"]
   - plugin: connect-go
     out: gen
     opt:
-      - paths=import
-      - module=github.com/binarymatt/kayak/gen
+      - paths=source_relative
   - plugin: buf.build/bufbuild/validate-go
     out: gen
     opt:
-      - paths=import
-      - module=github.com/binarymatt/kayak/gen
+      - paths=source_relative
   - plugin: go-grpc
-    out: gen
+    out: gen    
     opt:
-      - paths=import
-      - module=github.com/binarymatt/kayak/gen
-      - require_unimplemented_servers=false
+      - paths=source_relative
+      - require_unimplemented_servers=false    
+
+
+

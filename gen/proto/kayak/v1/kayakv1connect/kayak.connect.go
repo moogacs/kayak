@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "github.com/binarymatt/kayak/gen/kayak/v1"
+	v1 "github.com/kayak/gen/proto/kayak/v1"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	http "net/http"
 	strings "strings"
@@ -23,7 +23,7 @@ const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// KayakServiceName is the fully-qualified name of the KayakService service.
-	KayakServiceName = "kayak.v1.KayakService"
+	KayakServiceName = "proto.kayak.v1.KayakService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -35,36 +35,36 @@ const (
 // period.
 const (
 	// KayakServicePutRecordsProcedure is the fully-qualified name of the KayakService's PutRecords RPC.
-	KayakServicePutRecordsProcedure = "/kayak.v1.KayakService/PutRecords"
+	KayakServicePutRecordsProcedure = "/proto.kayak.v1.KayakService/PutRecords"
 	// KayakServiceCommitRecordProcedure is the fully-qualified name of the KayakService's CommitRecord
 	// RPC.
-	KayakServiceCommitRecordProcedure = "/kayak.v1.KayakService/CommitRecord"
+	KayakServiceCommitRecordProcedure = "/proto.kayak.v1.KayakService/CommitRecord"
 	// KayakServiceApplyProcedure is the fully-qualified name of the KayakService's Apply RPC.
-	KayakServiceApplyProcedure = "/kayak.v1.KayakService/Apply"
+	KayakServiceApplyProcedure = "/proto.kayak.v1.KayakService/Apply"
 	// KayakServiceGetRecordsProcedure is the fully-qualified name of the KayakService's GetRecords RPC.
-	KayakServiceGetRecordsProcedure = "/kayak.v1.KayakService/GetRecords"
+	KayakServiceGetRecordsProcedure = "/proto.kayak.v1.KayakService/GetRecords"
 	// KayakServiceFetchRecordProcedure is the fully-qualified name of the KayakService's FetchRecord
 	// RPC.
-	KayakServiceFetchRecordProcedure = "/kayak.v1.KayakService/FetchRecord"
+	KayakServiceFetchRecordProcedure = "/proto.kayak.v1.KayakService/FetchRecord"
 	// KayakServiceStreamRecordsProcedure is the fully-qualified name of the KayakService's
 	// StreamRecords RPC.
-	KayakServiceStreamRecordsProcedure = "/kayak.v1.KayakService/StreamRecords"
+	KayakServiceStreamRecordsProcedure = "/proto.kayak.v1.KayakService/StreamRecords"
 	// KayakServiceCreateTopicProcedure is the fully-qualified name of the KayakService's CreateTopic
 	// RPC.
-	KayakServiceCreateTopicProcedure = "/kayak.v1.KayakService/CreateTopic"
+	KayakServiceCreateTopicProcedure = "/proto.kayak.v1.KayakService/CreateTopic"
 	// KayakServiceDeleteTopicProcedure is the fully-qualified name of the KayakService's DeleteTopic
 	// RPC.
-	KayakServiceDeleteTopicProcedure = "/kayak.v1.KayakService/DeleteTopic"
+	KayakServiceDeleteTopicProcedure = "/proto.kayak.v1.KayakService/DeleteTopic"
 	// KayakServiceListTopicsProcedure is the fully-qualified name of the KayakService's ListTopics RPC.
-	KayakServiceListTopicsProcedure = "/kayak.v1.KayakService/ListTopics"
+	KayakServiceListTopicsProcedure = "/proto.kayak.v1.KayakService/ListTopics"
 	// KayakServiceStatsProcedure is the fully-qualified name of the KayakService's Stats RPC.
-	KayakServiceStatsProcedure = "/kayak.v1.KayakService/Stats"
+	KayakServiceStatsProcedure = "/proto.kayak.v1.KayakService/Stats"
 	// KayakServiceGetNodeDetailsProcedure is the fully-qualified name of the KayakService's
 	// GetNodeDetails RPC.
-	KayakServiceGetNodeDetailsProcedure = "/kayak.v1.KayakService/GetNodeDetails"
+	KayakServiceGetNodeDetailsProcedure = "/proto.kayak.v1.KayakService/GetNodeDetails"
 )
 
-// KayakServiceClient is a client for the kayak.v1.KayakService service.
+// KayakServiceClient is a client for the proto.kayak.v1.KayakService service.
 type KayakServiceClient interface {
 	PutRecords(context.Context, *connect.Request[v1.PutRecordsRequest]) (*connect.Response[emptypb.Empty], error)
 	CommitRecord(context.Context, *connect.Request[v1.CommitRecordRequest]) (*connect.Response[emptypb.Empty], error)
@@ -79,10 +79,10 @@ type KayakServiceClient interface {
 	GetNodeDetails(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.GetNodeDetailsResponse], error)
 }
 
-// NewKayakServiceClient constructs a client for the kayak.v1.KayakService service. By default, it
-// uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
-// uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
-// connect.WithGRPCWeb() options.
+// NewKayakServiceClient constructs a client for the proto.kayak.v1.KayakService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -162,62 +162,62 @@ type kayakServiceClient struct {
 	getNodeDetails *connect.Client[emptypb.Empty, v1.GetNodeDetailsResponse]
 }
 
-// PutRecords calls kayak.v1.KayakService.PutRecords.
+// PutRecords calls proto.kayak.v1.KayakService.PutRecords.
 func (c *kayakServiceClient) PutRecords(ctx context.Context, req *connect.Request[v1.PutRecordsRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.putRecords.CallUnary(ctx, req)
 }
 
-// CommitRecord calls kayak.v1.KayakService.CommitRecord.
+// CommitRecord calls proto.kayak.v1.KayakService.CommitRecord.
 func (c *kayakServiceClient) CommitRecord(ctx context.Context, req *connect.Request[v1.CommitRecordRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.commitRecord.CallUnary(ctx, req)
 }
 
-// Apply calls kayak.v1.KayakService.Apply.
+// Apply calls proto.kayak.v1.KayakService.Apply.
 func (c *kayakServiceClient) Apply(ctx context.Context, req *connect.Request[v1.Command]) (*connect.Response[emptypb.Empty], error) {
 	return c.apply.CallUnary(ctx, req)
 }
 
-// GetRecords calls kayak.v1.KayakService.GetRecords.
+// GetRecords calls proto.kayak.v1.KayakService.GetRecords.
 func (c *kayakServiceClient) GetRecords(ctx context.Context, req *connect.Request[v1.GetRecordsRequest]) (*connect.Response[v1.GetRecordsResponse], error) {
 	return c.getRecords.CallUnary(ctx, req)
 }
 
-// FetchRecord calls kayak.v1.KayakService.FetchRecord.
+// FetchRecord calls proto.kayak.v1.KayakService.FetchRecord.
 func (c *kayakServiceClient) FetchRecord(ctx context.Context, req *connect.Request[v1.FetchRecordRequest]) (*connect.Response[v1.FetchRecordsResponse], error) {
 	return c.fetchRecord.CallUnary(ctx, req)
 }
 
-// StreamRecords calls kayak.v1.KayakService.StreamRecords.
+// StreamRecords calls proto.kayak.v1.KayakService.StreamRecords.
 func (c *kayakServiceClient) StreamRecords(ctx context.Context, req *connect.Request[v1.StreamRecordsRequest]) (*connect.ServerStreamForClient[v1.Record], error) {
 	return c.streamRecords.CallServerStream(ctx, req)
 }
 
-// CreateTopic calls kayak.v1.KayakService.CreateTopic.
+// CreateTopic calls proto.kayak.v1.KayakService.CreateTopic.
 func (c *kayakServiceClient) CreateTopic(ctx context.Context, req *connect.Request[v1.CreateTopicRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.createTopic.CallUnary(ctx, req)
 }
 
-// DeleteTopic calls kayak.v1.KayakService.DeleteTopic.
+// DeleteTopic calls proto.kayak.v1.KayakService.DeleteTopic.
 func (c *kayakServiceClient) DeleteTopic(ctx context.Context, req *connect.Request[v1.DeleteTopicRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteTopic.CallUnary(ctx, req)
 }
 
-// ListTopics calls kayak.v1.KayakService.ListTopics.
+// ListTopics calls proto.kayak.v1.KayakService.ListTopics.
 func (c *kayakServiceClient) ListTopics(ctx context.Context, req *connect.Request[v1.ListTopicsRequest]) (*connect.Response[v1.ListTopicsResponse], error) {
 	return c.listTopics.CallUnary(ctx, req)
 }
 
-// Stats calls kayak.v1.KayakService.Stats.
+// Stats calls proto.kayak.v1.KayakService.Stats.
 func (c *kayakServiceClient) Stats(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.StatsResponse], error) {
 	return c.stats.CallUnary(ctx, req)
 }
 
-// GetNodeDetails calls kayak.v1.KayakService.GetNodeDetails.
+// GetNodeDetails calls proto.kayak.v1.KayakService.GetNodeDetails.
 func (c *kayakServiceClient) GetNodeDetails(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.GetNodeDetailsResponse], error) {
 	return c.getNodeDetails.CallUnary(ctx, req)
 }
 
-// KayakServiceHandler is an implementation of the kayak.v1.KayakService service.
+// KayakServiceHandler is an implementation of the proto.kayak.v1.KayakService service.
 type KayakServiceHandler interface {
 	PutRecords(context.Context, *connect.Request[v1.PutRecordsRequest]) (*connect.Response[emptypb.Empty], error)
 	CommitRecord(context.Context, *connect.Request[v1.CommitRecordRequest]) (*connect.Response[emptypb.Empty], error)
@@ -293,7 +293,7 @@ func NewKayakServiceHandler(svc KayakServiceHandler, opts ...connect.HandlerOpti
 		svc.GetNodeDetails,
 		opts...,
 	)
-	return "/kayak.v1.KayakService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/proto.kayak.v1.KayakService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case KayakServicePutRecordsProcedure:
 			kayakServicePutRecordsHandler.ServeHTTP(w, r)
@@ -327,45 +327,45 @@ func NewKayakServiceHandler(svc KayakServiceHandler, opts ...connect.HandlerOpti
 type UnimplementedKayakServiceHandler struct{}
 
 func (UnimplementedKayakServiceHandler) PutRecords(context.Context, *connect.Request[v1.PutRecordsRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.PutRecords is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.PutRecords is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) CommitRecord(context.Context, *connect.Request[v1.CommitRecordRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.CommitRecord is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.CommitRecord is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) Apply(context.Context, *connect.Request[v1.Command]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.Apply is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.Apply is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) GetRecords(context.Context, *connect.Request[v1.GetRecordsRequest]) (*connect.Response[v1.GetRecordsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.GetRecords is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.GetRecords is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) FetchRecord(context.Context, *connect.Request[v1.FetchRecordRequest]) (*connect.Response[v1.FetchRecordsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.FetchRecord is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.FetchRecord is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) StreamRecords(context.Context, *connect.Request[v1.StreamRecordsRequest], *connect.ServerStream[v1.Record]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.StreamRecords is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.StreamRecords is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) CreateTopic(context.Context, *connect.Request[v1.CreateTopicRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.CreateTopic is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.CreateTopic is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) DeleteTopic(context.Context, *connect.Request[v1.DeleteTopicRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.DeleteTopic is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.DeleteTopic is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) ListTopics(context.Context, *connect.Request[v1.ListTopicsRequest]) (*connect.Response[v1.ListTopicsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.ListTopics is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.ListTopics is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) Stats(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.StatsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.Stats is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.Stats is not implemented"))
 }
 
 func (UnimplementedKayakServiceHandler) GetNodeDetails(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.GetNodeDetailsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("kayak.v1.KayakService.GetNodeDetails is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.kayak.v1.KayakService.GetNodeDetails is not implemented"))
 }

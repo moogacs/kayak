@@ -1,8 +1,8 @@
 package transport
 
 import (
-	transportv1 "github.com/binarymatt/kayak/gen/transport/v1"
 	"github.com/hashicorp/raft"
+	transportv1 "github.com/kayak/gen/proto/transport/v1"
 )
 
 func decodeAppendEntriesRequest(m *transportv1.AppendEntriesRequest) *raft.AppendEntriesRequest {

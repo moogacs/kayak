@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "github.com/binarymatt/kayak/gen/admin/v1"
+	v1 "github.com/kayak/gen/proto/admin/v1"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	http "net/http"
 	strings "strings"
@@ -23,7 +23,7 @@ const _ = connect.IsAtLeastVersion0_1_0
 
 const (
 	// AdminServiceName is the fully-qualified name of the AdminService service.
-	AdminServiceName = "admin.v1.AdminService"
+	AdminServiceName = "proto.admin.v1.AdminService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -36,52 +36,52 @@ const (
 const (
 	// AdminServiceAddNonvoterProcedure is the fully-qualified name of the AdminService's AddNonvoter
 	// RPC.
-	AdminServiceAddNonvoterProcedure = "/admin.v1.AdminService/AddNonvoter"
+	AdminServiceAddNonvoterProcedure = "/proto.admin.v1.AdminService/AddNonvoter"
 	// AdminServiceAddVoterProcedure is the fully-qualified name of the AdminService's AddVoter RPC.
-	AdminServiceAddVoterProcedure = "/admin.v1.AdminService/AddVoter"
+	AdminServiceAddVoterProcedure = "/proto.admin.v1.AdminService/AddVoter"
 	// AdminServiceAppliedIndexProcedure is the fully-qualified name of the AdminService's AppliedIndex
 	// RPC.
-	AdminServiceAppliedIndexProcedure = "/admin.v1.AdminService/AppliedIndex"
+	AdminServiceAppliedIndexProcedure = "/proto.admin.v1.AdminService/AppliedIndex"
 	// AdminServiceDemoteVoterProcedure is the fully-qualified name of the AdminService's DemoteVoter
 	// RPC.
-	AdminServiceDemoteVoterProcedure = "/admin.v1.AdminService/DemoteVoter"
+	AdminServiceDemoteVoterProcedure = "/proto.admin.v1.AdminService/DemoteVoter"
 	// AdminServiceGetConfigurationProcedure is the fully-qualified name of the AdminService's
 	// GetConfiguration RPC.
-	AdminServiceGetConfigurationProcedure = "/admin.v1.AdminService/GetConfiguration"
+	AdminServiceGetConfigurationProcedure = "/proto.admin.v1.AdminService/GetConfiguration"
 	// AdminServiceLastContactProcedure is the fully-qualified name of the AdminService's LastContact
 	// RPC.
-	AdminServiceLastContactProcedure = "/admin.v1.AdminService/LastContact"
+	AdminServiceLastContactProcedure = "/proto.admin.v1.AdminService/LastContact"
 	// AdminServiceLastIndexProcedure is the fully-qualified name of the AdminService's LastIndex RPC.
-	AdminServiceLastIndexProcedure = "/admin.v1.AdminService/LastIndex"
+	AdminServiceLastIndexProcedure = "/proto.admin.v1.AdminService/LastIndex"
 	// AdminServiceLeaderProcedure is the fully-qualified name of the AdminService's Leader RPC.
-	AdminServiceLeaderProcedure = "/admin.v1.AdminService/Leader"
+	AdminServiceLeaderProcedure = "/proto.admin.v1.AdminService/Leader"
 	// AdminServiceLeadershipTransferProcedure is the fully-qualified name of the AdminService's
 	// LeadershipTransfer RPC.
-	AdminServiceLeadershipTransferProcedure = "/admin.v1.AdminService/LeadershipTransfer"
+	AdminServiceLeadershipTransferProcedure = "/proto.admin.v1.AdminService/LeadershipTransfer"
 	// AdminServiceLeadershipTransferToServerProcedure is the fully-qualified name of the AdminService's
 	// LeadershipTransferToServer RPC.
-	AdminServiceLeadershipTransferToServerProcedure = "/admin.v1.AdminService/LeadershipTransferToServer"
+	AdminServiceLeadershipTransferToServerProcedure = "/proto.admin.v1.AdminService/LeadershipTransferToServer"
 	// AdminServiceRemoveServerProcedure is the fully-qualified name of the AdminService's RemoveServer
 	// RPC.
-	AdminServiceRemoveServerProcedure = "/admin.v1.AdminService/RemoveServer"
+	AdminServiceRemoveServerProcedure = "/proto.admin.v1.AdminService/RemoveServer"
 	// AdminServiceShutdownProcedure is the fully-qualified name of the AdminService's Shutdown RPC.
-	AdminServiceShutdownProcedure = "/admin.v1.AdminService/Shutdown"
+	AdminServiceShutdownProcedure = "/proto.admin.v1.AdminService/Shutdown"
 	// AdminServiceSnapshotProcedure is the fully-qualified name of the AdminService's Snapshot RPC.
-	AdminServiceSnapshotProcedure = "/admin.v1.AdminService/Snapshot"
+	AdminServiceSnapshotProcedure = "/proto.admin.v1.AdminService/Snapshot"
 	// AdminServiceStateProcedure is the fully-qualified name of the AdminService's State RPC.
-	AdminServiceStateProcedure = "/admin.v1.AdminService/State"
+	AdminServiceStateProcedure = "/proto.admin.v1.AdminService/State"
 	// AdminServiceVerifyLeaderProcedure is the fully-qualified name of the AdminService's VerifyLeader
 	// RPC.
-	AdminServiceVerifyLeaderProcedure = "/admin.v1.AdminService/VerifyLeader"
+	AdminServiceVerifyLeaderProcedure = "/proto.admin.v1.AdminService/VerifyLeader"
 	// AdminServiceJoinProcedure is the fully-qualified name of the AdminService's Join RPC.
-	AdminServiceJoinProcedure = "/admin.v1.AdminService/Join"
+	AdminServiceJoinProcedure = "/proto.admin.v1.AdminService/Join"
 	// AdminServiceAwaitProcedure is the fully-qualified name of the AdminService's Await RPC.
-	AdminServiceAwaitProcedure = "/admin.v1.AdminService/Await"
+	AdminServiceAwaitProcedure = "/proto.admin.v1.AdminService/Await"
 	// AdminServiceForgetProcedure is the fully-qualified name of the AdminService's Forget RPC.
-	AdminServiceForgetProcedure = "/admin.v1.AdminService/Forget"
+	AdminServiceForgetProcedure = "/proto.admin.v1.AdminService/Forget"
 )
 
-// AdminServiceClient is a client for the admin.v1.AdminService service.
+// AdminServiceClient is a client for the proto.admin.v1.AdminService service.
 type AdminServiceClient interface {
 	AddNonvoter(context.Context, *connect.Request[v1.AddNonvoterRequest]) (*connect.Response[v1.Future], error)
 	AddVoter(context.Context, *connect.Request[v1.AddVoterRequest]) (*connect.Response[v1.Future], error)
@@ -103,10 +103,10 @@ type AdminServiceClient interface {
 	Forget(context.Context, *connect.Request[v1.Future]) (*connect.Response[v1.ForgetResponse], error)
 }
 
-// NewAdminServiceClient constructs a client for the admin.v1.AdminService service. By default, it
-// uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
-// uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
-// connect.WithGRPCWeb() options.
+// NewAdminServiceClient constructs a client for the proto.admin.v1.AdminService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -228,97 +228,97 @@ type adminServiceClient struct {
 	forget                     *connect.Client[v1.Future, v1.ForgetResponse]
 }
 
-// AddNonvoter calls admin.v1.AdminService.AddNonvoter.
+// AddNonvoter calls proto.admin.v1.AdminService.AddNonvoter.
 func (c *adminServiceClient) AddNonvoter(ctx context.Context, req *connect.Request[v1.AddNonvoterRequest]) (*connect.Response[v1.Future], error) {
 	return c.addNonvoter.CallUnary(ctx, req)
 }
 
-// AddVoter calls admin.v1.AdminService.AddVoter.
+// AddVoter calls proto.admin.v1.AdminService.AddVoter.
 func (c *adminServiceClient) AddVoter(ctx context.Context, req *connect.Request[v1.AddVoterRequest]) (*connect.Response[v1.Future], error) {
 	return c.addVoter.CallUnary(ctx, req)
 }
 
-// AppliedIndex calls admin.v1.AdminService.AppliedIndex.
+// AppliedIndex calls proto.admin.v1.AdminService.AppliedIndex.
 func (c *adminServiceClient) AppliedIndex(ctx context.Context, req *connect.Request[v1.AppliedIndexRequest]) (*connect.Response[v1.AppliedIndexResponse], error) {
 	return c.appliedIndex.CallUnary(ctx, req)
 }
 
-// DemoteVoter calls admin.v1.AdminService.DemoteVoter.
+// DemoteVoter calls proto.admin.v1.AdminService.DemoteVoter.
 func (c *adminServiceClient) DemoteVoter(ctx context.Context, req *connect.Request[v1.DemoteVoterRequest]) (*connect.Response[v1.Future], error) {
 	return c.demoteVoter.CallUnary(ctx, req)
 }
 
-// GetConfiguration calls admin.v1.AdminService.GetConfiguration.
+// GetConfiguration calls proto.admin.v1.AdminService.GetConfiguration.
 func (c *adminServiceClient) GetConfiguration(ctx context.Context, req *connect.Request[v1.GetConfigurationRequest]) (*connect.Response[v1.GetConfigurationResponse], error) {
 	return c.getConfiguration.CallUnary(ctx, req)
 }
 
-// LastContact calls admin.v1.AdminService.LastContact.
+// LastContact calls proto.admin.v1.AdminService.LastContact.
 func (c *adminServiceClient) LastContact(ctx context.Context, req *connect.Request[v1.LastContactRequest]) (*connect.Response[v1.LastContactResponse], error) {
 	return c.lastContact.CallUnary(ctx, req)
 }
 
-// LastIndex calls admin.v1.AdminService.LastIndex.
+// LastIndex calls proto.admin.v1.AdminService.LastIndex.
 func (c *adminServiceClient) LastIndex(ctx context.Context, req *connect.Request[v1.LastIndexRequest]) (*connect.Response[v1.LastIndexResponse], error) {
 	return c.lastIndex.CallUnary(ctx, req)
 }
 
-// Leader calls admin.v1.AdminService.Leader.
+// Leader calls proto.admin.v1.AdminService.Leader.
 func (c *adminServiceClient) Leader(ctx context.Context, req *connect.Request[v1.LeaderRequest]) (*connect.Response[v1.LeaderResponse], error) {
 	return c.leader.CallUnary(ctx, req)
 }
 
-// LeadershipTransfer calls admin.v1.AdminService.LeadershipTransfer.
+// LeadershipTransfer calls proto.admin.v1.AdminService.LeadershipTransfer.
 func (c *adminServiceClient) LeadershipTransfer(ctx context.Context, req *connect.Request[v1.LeadershipTransferRequest]) (*connect.Response[v1.Future], error) {
 	return c.leadershipTransfer.CallUnary(ctx, req)
 }
 
-// LeadershipTransferToServer calls admin.v1.AdminService.LeadershipTransferToServer.
+// LeadershipTransferToServer calls proto.admin.v1.AdminService.LeadershipTransferToServer.
 func (c *adminServiceClient) LeadershipTransferToServer(ctx context.Context, req *connect.Request[v1.LeadershipTransferToServerRequest]) (*connect.Response[v1.Future], error) {
 	return c.leadershipTransferToServer.CallUnary(ctx, req)
 }
 
-// RemoveServer calls admin.v1.AdminService.RemoveServer.
+// RemoveServer calls proto.admin.v1.AdminService.RemoveServer.
 func (c *adminServiceClient) RemoveServer(ctx context.Context, req *connect.Request[v1.RemoveServerRequest]) (*connect.Response[v1.Future], error) {
 	return c.removeServer.CallUnary(ctx, req)
 }
 
-// Shutdown calls admin.v1.AdminService.Shutdown.
+// Shutdown calls proto.admin.v1.AdminService.Shutdown.
 func (c *adminServiceClient) Shutdown(ctx context.Context, req *connect.Request[v1.ShutdownRequest]) (*connect.Response[v1.Future], error) {
 	return c.shutdown.CallUnary(ctx, req)
 }
 
-// Snapshot calls admin.v1.AdminService.Snapshot.
+// Snapshot calls proto.admin.v1.AdminService.Snapshot.
 func (c *adminServiceClient) Snapshot(ctx context.Context, req *connect.Request[v1.SnapshotRequest]) (*connect.Response[v1.Future], error) {
 	return c.snapshot.CallUnary(ctx, req)
 }
 
-// State calls admin.v1.AdminService.State.
+// State calls proto.admin.v1.AdminService.State.
 func (c *adminServiceClient) State(ctx context.Context, req *connect.Request[v1.StateRequest]) (*connect.Response[v1.StateResponse], error) {
 	return c.state.CallUnary(ctx, req)
 }
 
-// VerifyLeader calls admin.v1.AdminService.VerifyLeader.
+// VerifyLeader calls proto.admin.v1.AdminService.VerifyLeader.
 func (c *adminServiceClient) VerifyLeader(ctx context.Context, req *connect.Request[v1.VerifyLeaderRequest]) (*connect.Response[v1.Future], error) {
 	return c.verifyLeader.CallUnary(ctx, req)
 }
 
-// Join calls admin.v1.AdminService.Join.
+// Join calls proto.admin.v1.AdminService.Join.
 func (c *adminServiceClient) Join(ctx context.Context, req *connect.Request[v1.JoinRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.join.CallUnary(ctx, req)
 }
 
-// Await calls admin.v1.AdminService.Await.
+// Await calls proto.admin.v1.AdminService.Await.
 func (c *adminServiceClient) Await(ctx context.Context, req *connect.Request[v1.Future]) (*connect.Response[v1.AwaitResponse], error) {
 	return c.await.CallUnary(ctx, req)
 }
 
-// Forget calls admin.v1.AdminService.Forget.
+// Forget calls proto.admin.v1.AdminService.Forget.
 func (c *adminServiceClient) Forget(ctx context.Context, req *connect.Request[v1.Future]) (*connect.Response[v1.ForgetResponse], error) {
 	return c.forget.CallUnary(ctx, req)
 }
 
-// AdminServiceHandler is an implementation of the admin.v1.AdminService service.
+// AdminServiceHandler is an implementation of the proto.admin.v1.AdminService service.
 type AdminServiceHandler interface {
 	AddNonvoter(context.Context, *connect.Request[v1.AddNonvoterRequest]) (*connect.Response[v1.Future], error)
 	AddVoter(context.Context, *connect.Request[v1.AddVoterRequest]) (*connect.Response[v1.Future], error)
@@ -436,7 +436,7 @@ func NewAdminServiceHandler(svc AdminServiceHandler, opts ...connect.HandlerOpti
 		svc.Forget,
 		opts...,
 	)
-	return "/admin.v1.AdminService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/proto.admin.v1.AdminService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AdminServiceAddNonvoterProcedure:
 			adminServiceAddNonvoterHandler.ServeHTTP(w, r)
@@ -484,73 +484,73 @@ func NewAdminServiceHandler(svc AdminServiceHandler, opts ...connect.HandlerOpti
 type UnimplementedAdminServiceHandler struct{}
 
 func (UnimplementedAdminServiceHandler) AddNonvoter(context.Context, *connect.Request[v1.AddNonvoterRequest]) (*connect.Response[v1.Future], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.AddNonvoter is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.AddNonvoter is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) AddVoter(context.Context, *connect.Request[v1.AddVoterRequest]) (*connect.Response[v1.Future], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.AddVoter is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.AddVoter is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) AppliedIndex(context.Context, *connect.Request[v1.AppliedIndexRequest]) (*connect.Response[v1.AppliedIndexResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.AppliedIndex is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.AppliedIndex is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) DemoteVoter(context.Context, *connect.Request[v1.DemoteVoterRequest]) (*connect.Response[v1.Future], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.DemoteVoter is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.DemoteVoter is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) GetConfiguration(context.Context, *connect.Request[v1.GetConfigurationRequest]) (*connect.Response[v1.GetConfigurationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.GetConfiguration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.GetConfiguration is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) LastContact(context.Context, *connect.Request[v1.LastContactRequest]) (*connect.Response[v1.LastContactResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.LastContact is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.LastContact is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) LastIndex(context.Context, *connect.Request[v1.LastIndexRequest]) (*connect.Response[v1.LastIndexResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.LastIndex is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.LastIndex is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) Leader(context.Context, *connect.Request[v1.LeaderRequest]) (*connect.Response[v1.LeaderResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.Leader is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.Leader is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) LeadershipTransfer(context.Context, *connect.Request[v1.LeadershipTransferRequest]) (*connect.Response[v1.Future], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.LeadershipTransfer is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.LeadershipTransfer is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) LeadershipTransferToServer(context.Context, *connect.Request[v1.LeadershipTransferToServerRequest]) (*connect.Response[v1.Future], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.LeadershipTransferToServer is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.LeadershipTransferToServer is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) RemoveServer(context.Context, *connect.Request[v1.RemoveServerRequest]) (*connect.Response[v1.Future], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.RemoveServer is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.RemoveServer is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) Shutdown(context.Context, *connect.Request[v1.ShutdownRequest]) (*connect.Response[v1.Future], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.Shutdown is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.Shutdown is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) Snapshot(context.Context, *connect.Request[v1.SnapshotRequest]) (*connect.Response[v1.Future], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.Snapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.Snapshot is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) State(context.Context, *connect.Request[v1.StateRequest]) (*connect.Response[v1.StateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.State is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.State is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) VerifyLeader(context.Context, *connect.Request[v1.VerifyLeaderRequest]) (*connect.Response[v1.Future], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.VerifyLeader is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.VerifyLeader is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) Join(context.Context, *connect.Request[v1.JoinRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.Join is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.Join is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) Await(context.Context, *connect.Request[v1.Future]) (*connect.Response[v1.AwaitResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.Await is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.Await is not implemented"))
 }
 
 func (UnimplementedAdminServiceHandler) Forget(context.Context, *connect.Request[v1.Future]) (*connect.Response[v1.ForgetResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("admin.v1.AdminService.Forget is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("proto.admin.v1.AdminService.Forget is not implemented"))
 }

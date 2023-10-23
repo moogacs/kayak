@@ -7,7 +7,7 @@ import (
 	"github.com/oklog/ulid/v2"
 	"github.com/urfave/cli/v2"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
 )
 
 func CreateRecords(cctx *cli.Context) error {

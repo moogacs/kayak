@@ -12,8 +12,8 @@ import (
 	"github.com/hashicorp/raft"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/binarymatt/kayak/internal/config"
-	"github.com/binarymatt/kayak/mocks"
+	"github.com/kayak/internal/config"
+	"github.com/kayak/mocks"
 )
 
 type ServiceTestSuite struct {

@@ -6,7 +6,7 @@ import (
 	"connectrpc.com/connect"
 	"github.com/oklog/ulid/v2"
 
-	kayakv1 "github.com/binarymatt/kayak/gen/kayak/v1"
+	kayakv1 "github.com/kayak/gen/proto/kayak/v1"
 )
 
 func createRecords() []*kayakv1.Record {

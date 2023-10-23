@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package admin.v1;
+package proto.admin.v1;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/binarymatt/kayak/gen/admin/v1;adminv1";
+option go_package = "github.com/kayak/gen/proto/admin/v1;adminv1";
 
 service AdminService {
   rpc AddNonvoter(AddNonvoterRequest) returns (Future) {}
